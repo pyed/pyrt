@@ -616,6 +616,13 @@ class rtorrent:
         
     def getGlobalMaxOpenFiles(self):
         return self.conn.get_max_open_files()
+
+    def getTrackerMessage(self, id):
+        message = self.conn.d.get_message(id)
+        if message:
+            return message
+        else:
+            return "Connected"
         
     def setGlobalMaxOpenFiles(self, files):
         return self.conn.set_max_open_files(files)
