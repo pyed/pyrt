@@ -77,7 +77,7 @@ class Peer(object):
         self.peer_total = peer_total
 
 class Torrent(object):
-    def __init__(self, id=None, name=None, base_path=None, size_chunks=None, chunk_size=None, completed_bytes=None, creation_date=None, down_rate=None, up_rate=None, peers_connected=None, peers_total=None, seeders_connected=None, seeders_total=None, priority=None, ratio=None, size=None, up_total=None, down_total=None, status=None, private=None, trackers=None):
+    def __init__(self, id=None, name=None, base_path=None, size_chunks=None, chunk_size=None, completed_bytes=None, creation_date=None, down_rate=None, up_rate=None, peers_connected=None, peers_total=None, seeders_connected=None, seeders_total=None, priority=None, ratio=None, size=None, up_total=None, down_total=None, status=None, private=None, trackers=None, message=None):
         self.torrent_id = id
         self.name = name
         self.base_path = base_path
@@ -103,6 +103,7 @@ class Torrent(object):
         self.status = status
         self.private = bool(private)
         self.trackers = trackers
+        self.message = message
 
 class rtorrent:
     def __init__(self, port):
@@ -201,6 +202,7 @@ class rtorrent:
             "d.is_private=",
             "d.get_peers_complete=",
             "d.get_peers_accounted=",
+            "d.get_message="
         )
         torrentList = []
         for tor in torrentlist:
@@ -232,7 +234,8 @@ class rtorrent:
                     tor[13],
                     status,
                     tor[14],
-                    trackers
+                    trackers,
+                    message=tor[17]
                 )
             ]
 #            0 "d.get_hash=","d.get_name=","d.get_base_path=","d.get_size_chunks=","d.get_chunk_size=", 4
