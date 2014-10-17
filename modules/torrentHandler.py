@@ -355,6 +355,8 @@ class Handler:
             t.t_ratio = "%.02f" % (float(t.ratio)/1000)
             t.t_uprate = self.humanSize(t.up_rate)
             t.t_downrate = self.humanSize(t.down_rate)
+            t.t_peers = "(%d) %d" % (t.peers_connected, t.peers_total)
+            t.t_seeds = "(%d) %d" % (t.seeds_connected, t.seeds_total)
             t.t_percentage = int((float(t.completed_bytes) / t.size) * 100)
             updated_torrentList += [t]
         

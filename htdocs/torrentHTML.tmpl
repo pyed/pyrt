@@ -80,7 +80,7 @@
                 <div id="torrent_table">
                     <table id='torrent_list'>
                         <tr id='torrent_list_headings'>
-                        #set $SORTTYPES = ["name", "size", "ratio", "uprate", "downrate", "status"]
+                        #set $SORTTYPES = ["name", "size", "ratio", "uprate", "downrate", "seeds", "peers", "status"]
                         #for $sorttype in $SORTTYPES
                             <td class='heading'
                                 id="sortby_$sorttype"
@@ -136,6 +136,8 @@
                                 <td id="t_ratio_$t.torrent_id" title='$t.t_uploaded up / $t.t_downloaded down'>$t.t_ratio</td>
                                 <td id="t_uprate_$t.torrent_id">$t.t_uprate/s</td>
                                 <td id="t_downrate_$t.torrent_id">$t.t_downrate/s</td>
+                                <td id="t_seeds_$t.torrent_id">$t.t_seeds</td>
+                                <td id="t_peers_$t.torrent_id">$t.t_peers</td>
                                 <td id="t_status_$t.torrent_id">$t_status</td>
                                 <td id="t_controls_$t.torrent_id">
                                 #if $t_status == "Stopped" or $t_status == "Paused"
@@ -162,7 +164,7 @@
                         #end for
                         
                         <tr id='foot'>
-                            <td class='footing' colspan="7"></td>
+                            <td class='footing' colspan="9"></td>
                         </tr>
                     </table>
                 </div>
