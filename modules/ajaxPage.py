@@ -378,6 +378,7 @@ class Ajax:
             "trackers" : [x.__dict__ for x in self.RT.getTrackers(torrent_id)],
             "peer_details" : [self._peerProcess(x) for x in peers],
             "file_tree" : self.handler.fileTreeHTML(self.RT.getFiles(torrent_id), self.RT.getRootDir()),
+            "tracker_message": self.RT.getTrackerMessage(torrent_id)
         }
         if not html:
             return json.dumps(jsonObject)
