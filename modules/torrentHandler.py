@@ -76,6 +76,7 @@ class Handler:
         """
             outputs a more 'advanced' status from an inputted <t> (rtorrent.Torrent object)
             possible outcomes:
+                'Error'           # if there's a tracker message, then there's an Error
                 'Stopped'         # torrent is closed
                 'Paused'          # torrent is open but inactive
                 'Seeding (idle)'  # torrent is active and complete, but no connected peers
@@ -83,6 +84,10 @@ class Handler:
                 'Leeching (idle)' # torrent is active and incomplete, but no connected peers
                 'Leeching'        # torrent is active, incomplete, and has connected peers
         """
+        # if there's a tracker message, return the status as "Error", else go figure out the status.
+        if t.message:
+            return "Error"
+
         status_actual = t.status
         if status_actual == "Active":
             if t.completed_bytes == t.size:
