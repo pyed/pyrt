@@ -21,6 +21,7 @@
 
 import statvfs
 import os
+import subprocess
 import time
 import rtorrent
 import config
@@ -113,6 +114,11 @@ def uptime():
         boot_time_match = re.search("btime (\d+)", open("/proc/stat").read())
         if boot_time_match:
             boot_time = int(boot_time_match.group(1))
+    elif os.uname()[0] == "Darwin":
+        # if it's a Mac, use 'sysctl kern.boottime' to get the right time.
+        sysctl_boottime = subprocess.Popen(["sysctl", "kern.boottime"], stdout=subprocess.PIPE).communicate()[0]
+        sysctl_boottime_match = re.search('sec = (\d+),', sysctl_boottime).group(1)
+        boot_time = int(sysctl_boottime_match)
     else:
       boot_time = int(10)
     handler = torrentHandler.Handler()
