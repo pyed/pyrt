@@ -65,7 +65,7 @@ def hdd(path=None):
     total = usage[statvfs.F_BLOCKS]
     free = usage[statvfs.F_BFREE]
     used = total - free
-    block_size = usage[statvfs.F_BSIZE]
+    block_size = usage[statvfs.F_FRSIZE]
     
     return (used*block_size, total*block_size)
     
